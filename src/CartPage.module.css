@@ -1,0 +1,665 @@
+.page {
+  font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f2f2f2;
+  min-height: 100vh;
+  padding-bottom: 120px;
+}
+
+/* ── Header ── */
+.header {
+  background: #fff;
+  padding: 20px 16px 14px;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 4px 0 7px;
+  letter-spacing: -0.3px;
+}
+
+.location {
+  font-size: 13px;
+  color: #1aafaf;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.locationChevron {
+  font-size: 13px;
+}
+
+/* ── Ticker ── */
+.ticker {
+  background: #fff;
+  overflow: hidden;
+  padding: 9px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.tickerInner {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollTicker 22s linear infinite;
+  color: #1aafaf;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+@keyframes scrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  margin: 10px 12px;
+  padding: 16px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+
+/* ── Cart Item ── */
+.itemWrapper {
+  overflow: hidden;
+}
+
+.itemExiting {
+  animation: slideRemove 0.38s ease forwards;
+}
+
+@keyframes slideRemove {
+  0%   { transform: translateX(0);     opacity: 1; max-height: 160px; }
+  55%  { transform: translateX(-110%); opacity: 0; max-height: 160px; }
+  100% { transform: translateX(-110%); opacity: 0; max-height: 0;     }
+}
+
+.itemRow {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0 8px;
+}
+
+.itemImgWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.imgPlaceholder {
+  width: 70px;
+  height: 70px;
+  background: #e5e5e5;
+  border-radius: 10px;
+}
+
+.premiumBadge {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 22px;
+  height: 22px;
+  background: #f5a020;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.itemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.itemTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.itemMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 3px;
+  line-height: 1.35;
+}
+
+.itemSubtitle {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+.itemPriceCol {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.itemPrice {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1px;
+  white-space: nowrap;
+}
+
+.itemOriginalPrice {
+  font-size: 12px;
+  color: #bbb;
+  margin: 0;
+}
+
+.itemBottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.deliveryText {
+  font-size: 12px;
+  color: #bbb;
+  margin: 0;
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trashBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.stepBtn {
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.stepCount {
+  width: 26px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemDivider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 6px 0;
+}
+
+/* ── Upgrade Banner ── */
+.upgradeBanner {
+  background: #e2f7f7;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.upgradeLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.infoIcon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #1aafaf;
+  color: #1aafaf;
+  font-size: 11px;
+  font-weight: 700;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.upgradeLabel {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #1aafaf;
+  letter-spacing: 0.5px;
+}
+
+.upgradeRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upgradePrice {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1aafaf;
+}
+
+/* Toggle */
+.toggleWrap {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.toggleWrap input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggleSlider {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 22px;
+  transition: background 0.25s;
+}
+
+.toggleSlider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  top: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.25s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggleWrap input:checked + .toggleSlider {
+  background: #1aafaf;
+}
+
+.toggleWrap input:checked + .toggleSlider::before {
+  transform: translateX(16px);
+}
+
+/* ── Furlenco Protect ── */
+.protectCard {
+  background: #1c5254;
+  border-radius: 14px;
+  margin: 10px 12px;
+  padding: 16px;
+}
+
+.protectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.protectTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.protectTitle {
+  color: #3ecece;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.protectArrow {
+  color: #3ecece;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.checkboxWrap {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.checkboxWrap input {
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 5px;
+  background: transparent;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.checkboxWrap input:checked + .checkmark {
+  background: #1aafaf;
+  border-color: #1aafaf;
+}
+
+.checkboxWrap input:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.protectBody {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.shieldPlaceholder {
+  width: 62px;
+  height: 62px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.protectList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.protectList li {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 5px;
+  padding-left: 14px;
+  position: relative;
+}
+
+.protectList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.protectFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.coveredLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.protectPrice {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Related Products ── */
+.relatedRow {
+  display: flex;
+  gap: 10px;
+}
+
+.relatedItem {
+  flex: 1;
+  position: relative;
+}
+
+.relatedImgPlaceholder {
+  width: 100%;
+  padding-top: 100%;
+  background: #e5e5e5;
+  border-radius: 10px;
+}
+
+.relatedAddBtn {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 24px;
+  height: 24px;
+  background: #1aafaf;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ── Sticky Bar ── */
+.stickyBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  z-index: 100;
+  background: #fff;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.totalLabel {
+  font-size: 12px;
+  color: #888;
+  margin: 0 0 2px;
+}
+
+.totalAmount {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+  letter-spacing: -0.4px;
+}
+
+.continueBtn {
+  background: #1c5254;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 34px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+/* ── Offers ── */
+.offerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.offerIconWrap {
+  width: 42px;
+  height: 42px;
+  background: #2d9c6c;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.offerText {
+  flex: 1;
+}
+
+.offerCode {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 2px;
+}
+
+.offerSubtext {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+.applyBtn {
+  border: 1.5px solid #1aafaf;
+  color: #1aafaf;
+  background: none;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.couponRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.couponLabel {
+  font-size: 13px;
+  color: #444;
+}
+
+.couponCount {
+  font-size: 13px;
+  color: #444;
+  font-weight: 600;
+}
+
+/* ── Pricing ── */
+.pricingRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.pricingDivider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 10px 0;
+}
+
+.pricingFinalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.bottomPad {
+  height: 20px;
+}

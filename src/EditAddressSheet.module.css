@@ -1,0 +1,203 @@
+/* ── Overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlayVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Sheet ── */
+.sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  z-index: 301;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.sheetOpen {
+  transform: translateY(0);
+}
+
+.sheetContent {
+  overflow-y: auto;
+  max-height: 82vh;
+  padding: 24px 20px 40px;
+  font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Section label ── */
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+/* ── Address row ── */
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.locationIcon {
+  width: 40px;
+  height: 40px;
+  background: #e74c3c;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.addressText {
+  flex: 1;
+  min-width: 0;
+}
+
+.addressName {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 3px;
+}
+
+.addressDetail {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.changeBtn {
+  background: none;
+  border: none;
+  color: #1aafaf;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+/* ── Form fields ── */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.field {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 56px;
+  border: 1.5px solid #d4d4d4;
+  border-radius: 10px;
+  padding: 18px 14px 6px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1a1a1a;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #1aafaf;
+}
+
+.label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #aaa;
+  pointer-events: none;
+  transition: all 0.18s ease;
+  background: #fff;
+  padding: 0 2px;
+  font-family: inherit;
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: #888;
+}
+
+/* ── Save As ── */
+.saveAsLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.saveAsRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.saveAsBtn {
+  padding: 9px 22px;
+  border: 1.5px solid #c8e6e6;
+  border-radius: 22px;
+  background: #f0fafa;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.saveAsBtnActive {
+  background: #e0f4f4;
+  border-color: #1aafaf;
+  color: #1aafaf;
+  font-weight: 700;
+}
+
+/* ── Continue ── */
+.continueBtn {
+  width: 100%;
+  padding: 17px 0;
+  background: #1c5254;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
