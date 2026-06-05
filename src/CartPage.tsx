@@ -4,6 +4,12 @@ import CouponSheet from './CouponSheet'
 import LoginSheet from './LoginSheet'
 import RemoveItemSheet, { type CartItem } from './RemoveItemSheet'
 
+const RELATED_PRODUCTS = [
+  { id: 1, name: 'Bed Side Table', price: '₹249/mo', originalPrice: '₹409', discount: '-15%' },
+  { id: 2, name: 'Bed Side Table', price: '₹249/mo', originalPrice: '₹409', discount: null },
+  { id: 3, name: 'Bed Side Table', price: '₹249/mo', originalPrice: '₹409', discount: '-10%' },
+]
+
 const INITIAL_ITEMS: CartItem[] = [
   {
     id: 1,
@@ -11,7 +17,7 @@ const INITIAL_ITEMS: CartItem[] = [
     subtitle: 'Brand New, No Storage..',
     price: '₹249/mo',
     originalPrice: '₹409',
-    delivery: 'Delivery: 3-4 Days',
+    delivery: '3-4 Days',
     isPremium: false,
     image: '/YourCart/AaraSolidWood.png',
   },
@@ -21,7 +27,7 @@ const INITIAL_ITEMS: CartItem[] = [
     subtitle: 'Brand New, No Storage',
     price: '₹249/mo',
     originalPrice: '₹409',
-    delivery: 'Delivery: 3-4 Days',
+    delivery: '3-4 Days',
     isPremium: true,
     image: '/YourCart/queen.png',
   },
@@ -31,13 +37,12 @@ const INITIAL_ITEMS: CartItem[] = [
     subtitle: 'Refurbished, With Storage',
     price: '₹249/mo',
     originalPrice: '₹409',
-    delivery: 'Delivery: 3-4 Days',
+    delivery: '3-4 Days',
     isPremium: false,
     image: '/YourCart/sideTable.png',
   },
 ]
 
-const TICKER = '₹0 DEPOSIT  •  3/MO MIN TENURE  •  CANCEL ANYTIME  •  '
 
 interface Props {
   onNavigateToAddress: () => void
@@ -48,8 +53,7 @@ interface Props {
 export default function CartPage({ onNavigateToAddress, onBack, hideTotal = false }: Props) {
   const [items, setItems] = useState<CartItem[]>(INITIAL_ITEMS)
   const [quantities, setQuantities] = useState<Record<number, number>>({ 1: 1, 2: 1, 3: 1 })
-  const [upgradeEnabled, setUpgradeEnabled] = useState(false)
-  const [protectEnabled, setProtectEnabled] = useState(true)
+const [protectEnabled, setProtectEnabled] = useState(true)
   const [showCoupons, setShowCoupons] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
 
@@ -93,17 +97,14 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
 
       {/* ── Header ── */}
       <div className={styles.header}>
-        <button className={styles.backBtn} onClick={onBack}><img src="/back.svg" alt="Back" className={styles.backIcon} /></button>
-        <h1 className={styles.title}>Your Cart</h1>
-        <div className={styles.location}>
-          5th Phase, J P Nagar Bengaluru, 560078
-          <img src="/down.svg" alt="" className={styles.locationChevron} />
+        <div className={styles.headerLeft}>
+          <button className={styles.backBtn} onClick={onBack}><img src="/back.svg" alt="Back" className={styles.backIcon} /></button>
+          <h1 className={styles.title}>YOUR CART</h1>
         </div>
-      </div>
-
-      {/* ── Ticker ── */}
-      <div className={styles.ticker}>
-        <span className={styles.tickerInner}>{TICKER + TICKER}</span>
+        <button className={styles.pincodePill}>
+          560078
+          <img src="/down.svg" alt="" className={styles.locationChevron} />
+        </button>
       </div>
 
       {/* ── Items Card ── */}
@@ -118,7 +119,6 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
             <div className={styles.itemRow}>
               <div className={styles.itemImgWrap}>
                 <img src={item.image} className={styles.itemImg} alt={item.name} />
-                {item.isPremium && <div className={styles.premiumBadge} />}
               </div>
               <div className={styles.itemContent}>
                 <div className={styles.itemTopRow}>
@@ -132,7 +132,10 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
                   </div>
                 </div>
                 <div className={styles.itemBottomRow}>
-                  <p className={styles.deliveryText}>{item.delivery}</p>
+                  <div className={styles.deliveryRow}>
+                    <img src="/YourCart/icons/truck.svg" alt="" className={styles.truckIcon} />
+                    <span className={styles.deliveryText}>{item.delivery}</span>
+                  </div>
                   <div className={styles.itemActions}>
                     <button
                       className={styles.trashBtn}
@@ -155,42 +158,25 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
             {idx < items.length - 1 && <div className={styles.itemDivider} />}
           </div>
         ))}
-
-        {/* ── Upgrade Banner ── */}
-        <div className={styles.upgradeBanner}>
-          <div className={styles.upgradeLeft}>
-            <div className={styles.infoIcon}>i</div>
-            <span className={styles.upgradeLabel}>UPGRADE TO BRAND NEW</span>
-          </div>
-          <div className={styles.upgradeRight}>
-            <span className={styles.upgradePrice}>+ ₹50/mo</span>
-            <label className={styles.toggleWrap}>
-              <input type="checkbox" checked={upgradeEnabled} onChange={() => setUpgradeEnabled(v => !v)} />
-              <span className={styles.toggleSlider} />
-            </label>
-          </div>
-        </div>
       </div>
 
       {/* ── Furlenco Protect ── */}
       <div className={styles.protectCard}>
         <div className={styles.protectHeader}>
-          <div className={styles.protectTitleRow}>
-            <span className={styles.protectTitle}>FURLENCO PROTECT</span>
-            <span className={styles.protectArrow}>›</span>
+          <div className={styles.protectLeft}>
+            <img src="/YourCart/ferlencoProductLogo.jpg" className={styles.shieldImg} alt="Furlenco Protect" />
+            <div className={styles.protectTextBlock}>
+              <div className={styles.protectTitleRow}>
+                <span className={styles.protectTitle}>Furlenco Protect</span>
+                <span className={styles.protectArrow}>›</span>
+              </div>
+              <p className={styles.protectSubtitle}>Insure your furniture against scratches, dents and breakage</p>
+            </div>
           </div>
           <label className={styles.checkboxWrap}>
             <input type="checkbox" checked={protectEnabled} onChange={() => setProtectEnabled(v => !v)} />
             <span className={styles.checkmark} />
           </label>
-        </div>
-        <div className={styles.protectBody}>
-          <img src="/YourCart/ferlencoProductLogo.jpg" className={styles.shieldImg} alt="Furlenco Protect" />
-          <ul className={styles.protectList}>
-            <li>Covers scratches</li>
-            <li>Covers for small dents</li>
-            <li>Replacement on breakge</li>
-          </ul>
         </div>
         <div className={styles.protectFooter}>
           <span className={styles.coveredLabel}>03 Products covered</span>
@@ -202,16 +188,25 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
       <div className={styles.card}>
         <p className={styles.sectionLabel}>RELATED PRODUCTS</p>
         <div className={styles.relatedRow}>
-          {[1, 2, 3].map(i => (
-            <div key={i} className={styles.relatedItem}>
+          {RELATED_PRODUCTS.map(product => (
+            <div key={product.id} className={styles.relatedItem}>
               <div className={styles.relatedImgPlaceholder}>
-                <img src={`/YourCart/relatedProduct${i}.jpg`} className={styles.relatedImg} alt={`Related product ${i}`} />
+                <img src={`/YourCart/relatedProduct${product.id}.jpg`} className={styles.relatedImg} alt={product.name} />
+                <button className={styles.relatedAddBtn}>+</button>
               </div>
-              <button className={styles.relatedAddBtn}>+</button>
+              <p className={styles.relatedName}>{product.name}</p>
+              <div className={styles.relatedPriceRow}>
+                <span className={styles.relatedPrice}>{product.price}</span>
+                {product.discount && <span className={styles.relatedDiscount}>{product.discount}</span>}
+              </div>
+              <p className={styles.relatedOriginalPrice}>{product.originalPrice}</p>
             </div>
           ))}
         </div>
       </div>
+
+      {/* ── Icons Banner ── */}
+      <img src="/YourCart/iconsImage.svg" alt="" className={styles.iconsBanner} />
 
       {/* ── Sticky Bar ── */}
       {!hideTotal && <div className={styles.stickyBar}>
@@ -227,17 +222,27 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
         <p className={styles.sectionLabel}>OFFERS</p>
         <div className={styles.offerRow}>
           <div className={styles.offerIconWrap}>
-            <img src="/YourCart/icons/offerPercentage.svg" alt="Offer" className={styles.offerIcon} />
+            <img src="/summaryPage/GreenOffer.svg" alt="" className={styles.savingsIcon} />
           </div>
           <div className={styles.offerText}>
-            <p className={styles.offerCode}>FLAT100</p>
+            <p className={styles.offerCode}>Save ₹199</p>
             <p className={styles.offerSubtext}>Free delivery over ₹500/mo</p>
           </div>
-          <button className={styles.applyBtn}>Apply</button>
+          <button className={styles.applyBtn}>APPLY</button>
         </div>
-        <div className={styles.couponRow} onClick={() => setShowCoupons(true)}>
+        <div className={styles.couponBanner}>
+          <span>Add ₹299 to your cart to avail this coupon</span>
+        </div>
+      </div>
+
+      {/* ── View All Coupons ── */}
+      <div className={styles.card} onClick={() => setShowCoupons(true)} style={{ cursor: 'pointer' }}>
+        <div className={styles.couponRow}>
           <span className={styles.couponLabel}>View all coupons</span>
-          <span className={styles.couponCount}>(20) ›</span>
+          <div className={styles.couponRight}>
+            <span className={styles.couponCount}>(20)</span>
+            <span className={styles.couponChevron}>›</span>
+          </div>
         </div>
       </div>
 
@@ -252,6 +257,10 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
         <div className={styles.pricingFinalRow}>
           <span>Final cost</span>
           <span>₹13899.98</span>
+        </div>
+        <div className={styles.savingsBanner}>
+          <img src="/summaryPage/GreenOffer.svg" alt="" className={styles.savingsIcon} />
+          <span>You've saved <strong>₹389</strong> on this purchase</span>
         </div>
       </div>
 

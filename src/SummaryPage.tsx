@@ -8,27 +8,27 @@ type UPIOption = 'PhonePe' | 'G Pay' | 'Kiwi'
 
 const ITEMS = [
   { id: 1, name: 'Aara Solid wood upholstered Queen', price: '₹249/mo', isPremium: false, image: '/summaryPage/item1.png' },
-  { id: 2, name: 'Aara Solid wood upholstered Queen', price: '₹249/mo', isPremium: true,  image: '/summaryPage/item2.png' },
-  { id: 3, name: 'Bianca Traditional Side Table',     price: '₹249/mo', isPremium: false, image: '/summaryPage/item3.png' },
+  { id: 2, name: 'Aara Solid wood upholstered Queen', price: '₹249/mo', isPremium: true, image: '/summaryPage/item2.png' },
+  { id: 3, name: 'Bianca Traditional Side Table', price: '₹249/mo', isPremium: false, image: '/summaryPage/item3.png' },
 ]
 
 const COST_BREAKDOWN = [
-  { label: 'Total Cost',        amount: '₹2400'   },
-  { label: 'GST',               amount: '₹240.44' },
-  { label: 'Delivery Charges',  amount: '₹23.44'  },
-  { label: 'Deposit',           amount: '₹590'    },
+  { label: 'Total Cost', amount: '₹2400' },
+  { label: 'GST', amount: '₹240.44' },
+  { label: 'Delivery Charges', amount: '₹23.44' },
+  { label: 'Deposit', amount: '₹590' },
 ]
 
 const UPI_LOGOS: Record<UPIOption, string> = {
   'PhonePe': '/summaryPage/phonePeLogo.png',
-  'G Pay':   '/summaryPage/gpayLogo.png',
-  'Kiwi':    '/summaryPage/kiwiLogo.png',
+  'G Pay': '/summaryPage/gpayLogo.png',
+  'Kiwi': '/summaryPage/kiwiLogo.png',
 }
 
 const OTHERS = [
-  { label: 'Cards',      sub: 'Pay via cards',                     image: '/summaryPage/creditCardLogo.svg'  },
-  { label: 'Netbanking', sub: 'Select from a list of banks',       image: '/summaryPage/netBankingLogo.svg'  },
-  { label: 'Wallets',    sub: 'Paytm, PhonePe, Amazon Pay & more', image: '/summaryPage/WalletLogo.svg'      },
+  { label: 'Cards', sub: 'Pay via cards', image: '/summaryPage/creditCardLogo.svg', bg: '#1c5254' },
+  { label: 'Netbanking', sub: 'Select from a list of banks', image: '/summaryPage/netBankingLogo.svg', bg: '#1aafaf' },
+  { label: 'Wallets', sub: 'Paytm, PhonePe, Amazon Pay & more', image: '/summaryPage/WalletLogo.svg', bg: '#5b8def' },
 ]
 
 interface Props {
@@ -37,9 +37,9 @@ interface Props {
 
 export default function SummaryPage({ onBack }: Props) {
   const [itemsExpanded, setItemsExpanded] = useState(false)
-  const [costExpanded,  setCostExpanded]  = useState(false)
-  const [autoPayOn,     setAutoPayOn]     = useState(true)
-  const [selectedUPI,   setSelectedUPI]   = useState<UPIOption | null>(null)
+  const [costExpanded, setCostExpanded] = useState(false)
+  const [autoPayOn, setAutoPayOn] = useState(true)
+  const [selectedUPI, setSelectedUPI] = useState<UPIOption | null>(null)
 
   return (
     <div className={styles.page}>
@@ -68,7 +68,7 @@ export default function SummaryPage({ onBack }: Props) {
             </div>
           </div>
           <div className={styles.kycStrip}>
-            <div className={styles.truckPlaceholder} />
+            <img src="/blueTruck.svg" alt="" className={styles.truckIcon} />
             <span className={styles.kycText}>KYC VERIFICATION REQUIRED</span>
           </div>
         </div>
@@ -181,7 +181,9 @@ export default function SummaryPage({ onBack }: Props) {
               key={item.label}
               className={`${styles.othersRow} ${idx < OTHERS.length - 1 ? styles.othersRowBorder : ''}`}
             >
-              <img src={item.image} className={styles.othersIcon} alt={item.label} />
+              <div className={styles.othersIconWrap} style={{ background: item.bg }}>
+                <img src={item.image} className={styles.othersIcon} alt={item.label} />
+              </div>
               <div className={styles.othersInfo}>
                 <p className={styles.othersLabel}>{item.label}</p>
                 <p className={styles.othersSub}>{item.sub}</p>

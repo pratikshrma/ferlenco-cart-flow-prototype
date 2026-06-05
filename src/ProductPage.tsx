@@ -172,11 +172,6 @@ export default function ProductPage({ onBack, onRent }: Props) {
             </div>
           </div>
 
-          <button className={styles.rentBtn} onClick={onRent}>
-            <span className={styles.rentLabel}>RENT</span>
-            <span className={styles.rentPrice}>₹1249/mo</span>
-          </button>
-
         </div>
 
         {/* ── DETAILS ── */}
@@ -224,6 +219,15 @@ export default function ProductPage({ onBack, onRent }: Props) {
         </div>
 
       </div>
+
+      {/* ── Sticky Rent Bar ── */}
+      <div className={styles.rentBar}>
+        <button className={styles.rentBtn} onClick={onRent}>
+          <span className={styles.rentLabel}>RENT</span>
+          <span className={styles.rentPrice}>₹1249/mo</span>
+        </button>
+      </div>
+
     </div>
   )
 }

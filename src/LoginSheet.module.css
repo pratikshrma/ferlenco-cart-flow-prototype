@@ -56,13 +56,12 @@
   height: 20px;
 }
 
-.logoPlaceholder {
-  width: 44px;
-  height: 44px;
-  background: #1aafaf;
-  border-radius: 10px;
+.logo {
+  height: 32px;
+  width: auto;
   margin-bottom: 16px;
   flex-shrink: 0;
+  align-self: flex-start;
 }
 
 /* ── Sliding wrapper ── */
