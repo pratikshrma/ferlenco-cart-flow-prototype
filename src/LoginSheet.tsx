@@ -25,7 +25,7 @@ export default function LoginSheet({ open, onClose, onSuccess }: Props) {
       <div className={`${styles.sheet} ${open ? styles.sheetOpen : ''}`}>
 
         {/* stays: back + logo */}
-        <button className={styles.backBtn} onClick={step === 'otp' ? () => setStep('login') : handleClose}>‹</button>
+        <button className={styles.backBtn} onClick={step === 'otp' ? () => setStep('login') : handleClose}><img src="/back.svg" alt="Back" className={styles.backIcon} /></button>
         <div className={styles.logoPlaceholder} />
 
         {/* slides: title + subtitle + inputs */}

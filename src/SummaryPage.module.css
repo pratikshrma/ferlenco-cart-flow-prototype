@@ -19,13 +19,16 @@
 .backBtn {
   background: none;
   border: none;
-  font-size: 22px;
-  color: #1a1a1a;
   cursor: pointer;
   padding: 0;
-  line-height: 1;
-  display: block;
+  display: flex;
+  align-items: center;
   margin-bottom: 4px;
+}
+
+.backIcon {
+  width: 20px;
+  height: 20px;
 }
 
 .title {
@@ -90,9 +93,9 @@
 .locationIcon {
   width: 36px;
   height: 36px;
-  background: #e74c3c;
   border-radius: 9px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .addressName {
@@ -161,10 +164,15 @@
 }
 
 .chevron {
-  font-size: 18px;
-  color: #1aafaf;
   transition: transform 0.2s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+}
+
+.chevronImg {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .chevronClosed {
@@ -191,9 +199,9 @@
 .thumb {
   width: 72px;
   height: 72px;
-  background: #e0e0e0;
   border-radius: 8px;
   flex-shrink: 0;
+  object-fit: cover;
 }
 
 .thumbWrap {
@@ -245,8 +253,8 @@
 .itemThumb {
   width: 64px;
   height: 64px;
-  background: #e0e0e0;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .premiumDot {
@@ -331,9 +339,9 @@
 .coinPlaceholder {
   width: 36px;
   height: 36px;
-  background: #e8b44a;
   border-radius: 10px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .autoPayText {
@@ -406,9 +414,9 @@
 .offerIcon {
   width: 36px;
   height: 36px;
-  background: #2d9c6c;
   border-radius: 9px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .offerCode {
@@ -493,6 +501,7 @@
   height: 40px;
   border-radius: 50%;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .upiName {
@@ -516,9 +525,9 @@
 .othersIcon {
   width: 38px;
   height: 38px;
-  background: #1aafaf;
   border-radius: 10px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .othersInfo {

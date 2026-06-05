@@ -5,16 +5,11 @@ const TICKER = '₹0 DEPOSIT  •  3/MO MIN TENURE  •  CANCEL ANYTIME  •  '
 
 type UPIOption = 'PhonePe' | 'G Pay' | 'Kiwi'
 
-const UPI_COLORS: Record<UPIOption, string> = {
-  'PhonePe': '#6739b7',
-  'G Pay':   '#e8f0fe',
-  'Kiwi':    '#4caf50',
-}
 
 const ITEMS = [
-  { id: 1, name: 'Aara Solid wood upholstered Queen', price: '₹249/mo', isPremium: false },
-  { id: 2, name: 'Aara Solid wood upholstered Queen', price: '₹249/mo', isPremium: true  },
-  { id: 3, name: 'Bianca Traditional Side Table',     price: '₹249/mo', isPremium: false },
+  { id: 1, name: 'Aara Solid wood upholstered Queen', price: '₹249/mo', isPremium: false, image: '/summaryPage/item1.png' },
+  { id: 2, name: 'Aara Solid wood upholstered Queen', price: '₹249/mo', isPremium: true,  image: '/summaryPage/item2.png' },
+  { id: 3, name: 'Bianca Traditional Side Table',     price: '₹249/mo', isPremium: false, image: '/summaryPage/item3.png' },
 ]
 
 const COST_BREAKDOWN = [
@@ -24,10 +19,16 @@ const COST_BREAKDOWN = [
   { label: 'Deposit',           amount: '₹590'    },
 ]
 
+const UPI_LOGOS: Record<UPIOption, string> = {
+  'PhonePe': '/summaryPage/phonePeLogo.png',
+  'G Pay':   '/summaryPage/gpayLogo.png',
+  'Kiwi':    '/summaryPage/kiwiLogo.png',
+}
+
 const OTHERS = [
-  { label: 'Cards',      sub: 'Pay via cards'                   },
-  { label: 'Netbanking', sub: 'Select from a list of banks'     },
-  { label: 'Wallets',    sub: 'Paytm, PhonePe, Amazon Pay & more' },
+  { label: 'Cards',      sub: 'Pay via cards',                     image: '/summaryPage/creditCardLogo.svg'  },
+  { label: 'Netbanking', sub: 'Select from a list of banks',       image: '/summaryPage/netBankingLogo.svg'  },
+  { label: 'Wallets',    sub: 'Paytm, PhonePe, Amazon Pay & more', image: '/summaryPage/WalletLogo.svg'      },
 ]
 
 interface Props {
@@ -45,7 +46,7 @@ export default function SummaryPage({ onBack }: Props) {
 
       {/* ── Header ── */}
       <div className={styles.header}>
-        <button className={styles.backBtn} onClick={onBack}>‹</button>
+        <button className={styles.backBtn} onClick={onBack}><img src="/back.svg" alt="Back" className={styles.backIcon} /></button>
         <h1 className={styles.title}>Summary</h1>
       </div>
 
@@ -59,7 +60,7 @@ export default function SummaryPage({ onBack }: Props) {
               <button className={styles.tealTextBtn}>EDIT</button>
             </div>
             <div className={styles.addressRow}>
-              <div className={styles.locationIcon} />
+              <img src="/summaryPage/adityaTiwariLogo.svg" className={styles.locationIcon} alt="Location" />
               <div>
                 <p className={styles.addressName}>Aditya Tiwari</p>
                 <p className={styles.addressDetail}>T-1, Rose Garden, 5th Main,{'\n'}Bengaluru, Karnataka</p>
@@ -76,15 +77,15 @@ export default function SummaryPage({ onBack }: Props) {
         <div className={styles.card}>
           <button className={styles.collapseRow} onClick={() => setItemsExpanded(v => !v)}>
             <span className={styles.sectionLabel}>03 ITEMS</span>
-            <span className={`${styles.chevron} ${itemsExpanded ? '' : styles.chevronClosed}`}>▾</span>
+            <span className={`${styles.chevron} ${itemsExpanded ? '' : styles.chevronClosed}`}><img src="/down.svg" alt="" className={styles.chevronImg} /></span>
           </button>
           {!itemsExpanded ? (
             <div className={styles.itemsCollapsed}>
               <p className={styles.itemsSummaryText}>Aara solid wood Queen bed, Side table...</p>
               <div className={styles.thumbRow}>
-                <div className={styles.thumb} />
-                <div className={styles.thumb} />
-                <div className={styles.thumb} />
+                {ITEMS.map(item => (
+                  <img key={item.id} src={item.image} className={styles.thumb} alt={item.name} />
+                ))}
               </div>
             </div>
           ) : (
@@ -92,7 +93,7 @@ export default function SummaryPage({ onBack }: Props) {
               {ITEMS.map((item, idx) => (
                 <div key={item.id} className={`${styles.itemRow} ${idx < ITEMS.length - 1 ? styles.itemRowBorder : ''}`}>
                   <div className={styles.itemThumbWrap}>
-                    <div className={styles.itemThumb} />
+                    <img src={item.image} className={styles.itemThumb} alt={item.name} />
                     {item.isPremium && <span className={styles.premiumDot} />}
                   </div>
                   <p className={styles.itemName}>{item.name}</p>
@@ -107,7 +108,7 @@ export default function SummaryPage({ onBack }: Props) {
         <div className={styles.card}>
           <button className={styles.collapseRow} onClick={() => setCostExpanded(v => !v)}>
             <span className={styles.sectionLabel}>COST BREAKUP</span>
-            <span className={`${styles.chevron} ${costExpanded ? '' : styles.chevronClosed}`}>▾</span>
+            <span className={`${styles.chevron} ${costExpanded ? '' : styles.chevronClosed}`}><img src="/down.svg" alt="" className={styles.chevronImg} /></span>
           </button>
           <div className={styles.payableRow}>
             <span className={styles.payableLabel}>Payable now</span>
@@ -135,7 +136,7 @@ export default function SummaryPage({ onBack }: Props) {
             </label>
           </div>
           <div className={styles.autoPayRow}>
-            <div className={styles.coinPlaceholder} />
+            <img src="/summaryPage/yellowPayAuto.svg" className={styles.coinPlaceholder} alt="Auto Pay" />
             <span className={styles.autoPayText}>Your monthly payments</span>
             <span className={styles.autoPayAmount}>₹574/mo</span>
           </div>
@@ -145,7 +146,7 @@ export default function SummaryPage({ onBack }: Props) {
         <div className={styles.card}>
           <span className={styles.sectionLabel}>OFFERS</span>
           <div className={styles.offerRow}>
-            <div className={styles.offerIcon} />
+            <img src="/summaryPage/GreenOffer.svg" className={styles.offerIcon} alt="Offer" />
             <span className={styles.offerCode}>FLAT100</span>
             <span className={styles.appliedText}>APPLIED ✓</span>
           </div>
@@ -168,7 +169,7 @@ export default function SummaryPage({ onBack }: Props) {
                 className={`${styles.upiOption} ${selectedUPI === opt ? styles.upiOptionActive : ''}`}
                 onClick={() => setSelectedUPI(opt)}
               >
-                <div className={styles.upiIcon} style={{ background: UPI_COLORS[opt] }} />
+                <img src={UPI_LOGOS[opt]} className={styles.upiIcon} alt={opt} />
                 <span className={styles.upiName}>{opt}</span>
               </button>
             ))}
@@ -180,7 +181,7 @@ export default function SummaryPage({ onBack }: Props) {
               key={item.label}
               className={`${styles.othersRow} ${idx < OTHERS.length - 1 ? styles.othersRowBorder : ''}`}
             >
-              <div className={styles.othersIcon} />
+              <img src={item.image} className={styles.othersIcon} alt={item.label} />
               <div className={styles.othersInfo}>
                 <p className={styles.othersLabel}>{item.label}</p>
                 <p className={styles.othersSub}>{item.sub}</p>

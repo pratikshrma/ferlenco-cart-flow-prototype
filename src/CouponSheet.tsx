@@ -61,7 +61,7 @@ export default function CouponSheet({ open, onClose }: Props) {
           {validCoupons.map(coupon => (
             <div key={coupon.id} className={styles.validCard}>
               <div className={styles.cardTop}>
-                <div className={`${styles.iconBox} ${styles.iconGreen}`}>%</div>
+                <div className={`${styles.iconBox} ${styles.iconGreen}`}><img src="/YourCart/icons/offerPercentage.svg" alt="Offer" className={styles.iconImg} /></div>
                 <div className={styles.cardInfo}>
                   <p className={styles.cardCode}>{coupon.code}</p>
                   <p className={styles.cardSave}>{coupon.save}</p>
@@ -78,7 +78,7 @@ export default function CouponSheet({ open, onClose }: Props) {
           {invalidCoupons.map(coupon => (
             <div key={coupon.id} className={styles.invalidCard}>
               <div className={styles.cardTop}>
-                <div className={`${styles.iconBox} ${styles.iconGray}`}>%</div>
+                <div className={`${styles.iconBox} ${styles.iconGray}`}><img src="/YourCart/icons/offerPercentage.svg" alt="Offer" className={styles.iconImg} /></div>
                 <div className={styles.cardInfo}>
                   <p className={styles.cardCode}>{coupon.code}</p>
                   <p className={styles.cardSave}>{coupon.save}</p>

@@ -9,6 +9,7 @@ export interface CartItem {
   originalPrice: string
   delivery: string
   isPremium: boolean
+  image: string
 }
 
 interface Props {

@@ -110,10 +110,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.iconImg {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  display: block;
 }
 
 .iconGreen {

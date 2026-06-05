@@ -1,0 +1,506 @@
+/* ── Page ── */
+.page {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+}
+
+/* ── Nav bar ── */
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+.cartWrap {
+  position: relative;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  background: #e74c3c;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Scroll area ── */
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ── Product image ── */
+.imageSection {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  flex-shrink: 0;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imageOverlay {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.shareBtn,
+.heartBtn {
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.heartBtn {
+  border-radius: 50%;
+}
+
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 50%;
+}
+
+.dotActive {
+  width: 22px;
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+/* ── Product info ── */
+.productInfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+}
+
+.productTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.35;
+  flex: 1;
+  white-space: pre-line;
+}
+
+.priceStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  margin-left: 12px;
+  padding-top: 2px;
+}
+
+.originalPrice {
+  font-size: 12px;
+  color: #aaa;
+  text-decoration: line-through;
+  line-height: 1.4;
+}
+
+.mainPrice {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+/* ── Sticky tab bar ── */
+.tabBar {
+  display: flex;
+  border-bottom: 1.5px solid #ebebeb;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  color: #b0b0b0;
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  transition: color 0.15s;
+}
+
+.tabActive {
+  color: #1a1a1a;
+}
+
+.tabActive::after {
+  content: '';
+  position: absolute;
+  bottom: -1.5px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: #1aafaf;
+}
+
+/* ── Section wrapper ── */
+.section {
+  padding: 20px 16px 8px;
+}
+
+/* ── CUSTOMISE ── */
+.sectionHead {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+}
+
+.optionRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.optionCardWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.optionCard {
+  width: 100%;
+  background: #eef1f6;
+  border: 1.5px solid #dedede;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  transition: border-color 0.15s;
+}
+
+.optionActive {
+  border-color: #1aafaf;
+}
+
+.optionImg {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  display: block;
+}
+
+.optionFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 2px 4px;
+}
+
+.optionLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.optionPrice {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+}
+
+/* ── Get Brand New ── */
+.brandNewRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 18px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.brandNewLeft {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.brandNewLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.infoIcon {
+  width: 17px;
+  height: 17px;
+  background: #1aafaf;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandNewRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandNewPrice {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ── Toggle ── */
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleTrack {
+  display: block;
+  width: 46px;
+  height: 27px;
+  background: #ccc;
+  border-radius: 14px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.toggleTrack::after {
+  content: '';
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  background: #fff;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle input:checked + .toggleTrack {
+  background: #1aafaf;
+}
+
+.toggle input:checked + .toggleTrack::after {
+  transform: translateX(19px);
+}
+
+/* ── Rent button ── */
+.rentBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 20px;
+  background: #1c5254;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-bottom: 8px;
+}
+
+.rentLabel {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.rentPrice {
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* ── DETAILS ── */
+.bigHeading {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+  margin: 0 0 20px;
+}
+
+.subHeading {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.specRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.specLabel {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.specValue {
+  font-size: 14px;
+  font-weight: 400;
+  color: #aaa;
+}
+
+.dimsRow {
+  display: flex;
+  padding: 12px 0 20px;
+}
+
+.dimItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dimValue {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.dimLabel {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.mattressLabel {
+  font-size: 12px;
+  color: #aaa;
+  margin: 0 0 5px;
+}
+
+.mattressValue {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+.diagramImg {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: #f8f8f8;
+}
+
+/* ── DELIVERY ── */
+.assemblyHeading {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+.deliveryItem {
+  margin-bottom: 22px;
+}
+
+.deliveryTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.deliverySub {
+  font-size: 13px;
+  color: #aaa;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ── Bottom padding ── */
+.bottomPad {
+  height: 40px;
+}

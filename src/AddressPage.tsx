@@ -11,12 +11,11 @@ export default function AddressPage({ onBack, onContinue, onEditAddress }: Props
     <div className={styles.page}>
 
       {/* ── Back button ── */}
-      <button className={styles.backBtn} onClick={onBack}>‹</button>
+      <button className={styles.backBtn} onClick={onBack}><img src="/back.svg" alt="Back" width={18} height={18} /></button>
 
-      {/* ── Map placeholder ── */}
+      {/* ── Map ── */}
       <div className={styles.mapPlaceholder}>
-        <div className={styles.tooltip}>Order will be delivered here</div>
-        <div className={styles.pin} />
+        <img src="/PickAddress/map.png" className={styles.mapImg} alt="Map" />
       </div>
 
       {/* ── Bottom card ── */}

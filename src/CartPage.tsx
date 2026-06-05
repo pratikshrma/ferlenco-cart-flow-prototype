@@ -13,6 +13,7 @@ const INITIAL_ITEMS: CartItem[] = [
     originalPrice: '₹409',
     delivery: 'Delivery: 3-4 Days',
     isPremium: false,
+    image: '/YourCart/AaraSolidWood.png',
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ const INITIAL_ITEMS: CartItem[] = [
     originalPrice: '₹409',
     delivery: 'Delivery: 3-4 Days',
     isPremium: true,
+    image: '/YourCart/queen.png',
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const INITIAL_ITEMS: CartItem[] = [
     originalPrice: '₹409',
     delivery: 'Delivery: 3-4 Days',
     isPremium: false,
+    image: '/YourCart/sideTable.png',
   },
 ]
 
@@ -38,10 +41,11 @@ const TICKER = '₹0 DEPOSIT  •  3/MO MIN TENURE  •  CANCEL ANYTIME  •  '
 
 interface Props {
   onNavigateToAddress: () => void
+  onBack: () => void
   hideTotal?: boolean
 }
 
-export default function CartPage({ onNavigateToAddress, hideTotal = false }: Props) {
+export default function CartPage({ onNavigateToAddress, onBack, hideTotal = false }: Props) {
   const [items, setItems] = useState<CartItem[]>(INITIAL_ITEMS)
   const [quantities, setQuantities] = useState<Record<number, number>>({ 1: 1, 2: 1, 3: 1 })
   const [upgradeEnabled, setUpgradeEnabled] = useState(false)
@@ -89,11 +93,11 @@ export default function CartPage({ onNavigateToAddress, hideTotal = false }: Pro
 
       {/* ── Header ── */}
       <div className={styles.header}>
-        <button className={styles.backBtn}>‹</button>
+        <button className={styles.backBtn} onClick={onBack}><img src="/back.svg" alt="Back" className={styles.backIcon} /></button>
         <h1 className={styles.title}>Your Cart</h1>
         <div className={styles.location}>
           5th Phase, J P Nagar Bengaluru, 560078
-          <span className={styles.locationChevron}>▾</span>
+          <img src="/down.svg" alt="" className={styles.locationChevron} />
         </div>
       </div>
 
@@ -113,7 +117,7 @@ export default function CartPage({ onNavigateToAddress, hideTotal = false }: Pro
           >
             <div className={styles.itemRow}>
               <div className={styles.itemImgWrap}>
-                <div className={styles.imgPlaceholder} />
+                <img src={item.image} className={styles.itemImg} alt={item.name} />
                 {item.isPremium && <div className={styles.premiumBadge} />}
               </div>
               <div className={styles.itemContent}>
@@ -181,7 +185,7 @@ export default function CartPage({ onNavigateToAddress, hideTotal = false }: Pro
           </label>
         </div>
         <div className={styles.protectBody}>
-          <div className={styles.shieldPlaceholder} />
+          <img src="/YourCart/ferlencoProductLogo.jpg" className={styles.shieldImg} alt="Furlenco Protect" />
           <ul className={styles.protectList}>
             <li>Covers scratches</li>
             <li>Covers for small dents</li>
@@ -200,7 +204,9 @@ export default function CartPage({ onNavigateToAddress, hideTotal = false }: Pro
         <div className={styles.relatedRow}>
           {[1, 2, 3].map(i => (
             <div key={i} className={styles.relatedItem}>
-              <div className={styles.relatedImgPlaceholder} />
+              <div className={styles.relatedImgPlaceholder}>
+                <img src={`/YourCart/relatedProduct${i}.jpg`} className={styles.relatedImg} alt={`Related product ${i}`} />
+              </div>
               <button className={styles.relatedAddBtn}>+</button>
             </div>
           ))}
@@ -221,7 +227,7 @@ export default function CartPage({ onNavigateToAddress, hideTotal = false }: Pro
         <p className={styles.sectionLabel}>OFFERS</p>
         <div className={styles.offerRow}>
           <div className={styles.offerIconWrap}>
-            <span>%</span>
+            <img src="/YourCart/icons/offerPercentage.svg" alt="Offer" className={styles.offerIcon} />
           </div>
           <div className={styles.offerText}>
             <p className={styles.offerCode}>FLAT100</p>
