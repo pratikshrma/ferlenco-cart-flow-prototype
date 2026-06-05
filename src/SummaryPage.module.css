@@ -19,8 +19,10 @@
 
 /* ── Header ── */
 .header {
-  padding: 16px 20px 10px;
+  /* padding: 16px 20px 10px; */
+  padding-top: 16px;
   flex-shrink: 0;
+  gap: 100px;
 }
 
 .backBtn {
@@ -30,7 +32,7 @@
   padding: 0;
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 .backIcon {
@@ -297,7 +299,6 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 14px;
-  margin-bottom: 16px;
 }
 
 .payableLabel {
@@ -308,7 +309,7 @@
 
 .payableAmount {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #1a1a1a;
 }
 
@@ -445,7 +446,7 @@
 .ticker {
   overflow: hidden;
   white-space: nowrap;
-  background: #fff;
+  /* background: #fff; */
   border-radius: 10px;
   margin-bottom: 10px;
   padding: 10px 0;
@@ -455,8 +456,8 @@
   display: inline-block;
   animation: tickerScroll 14s linear infinite;
   font-size: 11px;
-  font-weight: 700;
-  color: #1a1a1a;
+  font-weight: 400;
+  color: #2d7d89;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
