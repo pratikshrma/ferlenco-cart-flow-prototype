@@ -4,6 +4,8 @@ import CartPage from './CartPage'
 import AddressPage from './AddressPage'
 import EditAddressSheet from './EditAddressSheet'
 import SummaryPage from './SummaryPage'
+import FomoSheet from './FomoSheet'
+import SelectAddressSheet from './SelectAddressSheet'
 import styles from './App.module.css'
 
 type Screen = 'product' | 'cart' | 'address' | 'summary'
@@ -11,13 +13,15 @@ type Screen = 'product' | 'cart' | 'address' | 'summary'
 export default function App() {
   const [screen, setScreen] = useState<Screen>('product')
   const [showEditSheet, setShowEditSheet] = useState(false)
+  const [showFomoSheet, setShowFomoSheet] = useState(false)
+  const [showSelectAddress, setShowSelectAddress] = useState(false)
 
   return (
     <>
       {/* Product page is always the base */}
       <ProductPage
         onBack={() => setScreen('cart')}
-        onRent={() => setScreen('cart')}
+        onRent={() => setShowFomoSheet(true)}
       />
 
       {/* Cart slides over product */}
@@ -45,7 +49,10 @@ export default function App() {
       {/* Summary slides over address */}
       {screen === 'summary' && (
         <div className={styles.slideInRight}>
-          <SummaryPage onBack={() => setScreen('address')} />
+          <SummaryPage
+            onBack={() => setScreen('address')}
+            onEditAddress={() => setShowSelectAddress(true)}
+          />
         </div>
       )}
 
@@ -53,6 +60,18 @@ export default function App() {
         open={showEditSheet}
         onClose={() => setShowEditSheet(false)}
         onContinue={() => setShowEditSheet(false)}
+      />
+
+      <FomoSheet
+        open={showFomoSheet}
+        onClose={() => setShowFomoSheet(false)}
+        onContinue={() => { setShowFomoSheet(false); setScreen('cart') }}
+      />
+
+      <SelectAddressSheet
+        open={showSelectAddress}
+        onClose={() => setShowSelectAddress(false)}
+        onSave={() => setShowSelectAddress(false)}
       />
     </>
   )

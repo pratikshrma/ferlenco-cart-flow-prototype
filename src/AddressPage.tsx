@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import styles from './AddressPage.module.css'
+import HassleSheet from './HassleSheet'
 
 interface Props {
   onBack: () => void
@@ -7,6 +9,8 @@ interface Props {
 }
 
 export default function AddressPage({ onBack, onContinue, onEditAddress }: Props) {
+  const [showHassle, setShowHassle] = useState(false)
+
   return (
     <div className={styles.page}>
 
@@ -31,8 +35,14 @@ export default function AddressPage({ onBack, onContinue, onEditAddress }: Props
           <button className={styles.editBtn} onClick={onEditAddress}>EDIT</button>
         </div>
 
-        <button className={styles.continueBtn} onClick={onContinue}>Continue</button>
+        <button className={styles.continueBtn} onClick={() => setShowHassle(true)}>Continue</button>
       </div>
+
+      <HassleSheet
+        open={showHassle}
+        onClose={() => setShowHassle(false)}
+        onContinue={() => { setShowHassle(false); onContinue() }}
+      />
 
     </div>
   )

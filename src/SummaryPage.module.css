@@ -53,6 +53,7 @@
   flex: 1;
   overflow-y: auto;
   padding: 10px 0 0;
+  padding-bottom: 16px;
 }
 
 /* ── Cards ── */
@@ -579,4 +580,71 @@
 /* ── Bottom pad ── */
 .bottomPad {
   height: 32px;
+}
+
+/* ── Sticky Pay Bar ── */
+.stickyBar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #fff;
+  padding: 12px 16px 20px;
+  margin: 0 -18px -18px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.payUsing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.payUsingLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.payUsingRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.phonepeIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.payUsingMethod {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.payBtn {
+  background: #2a6f7f;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
 }

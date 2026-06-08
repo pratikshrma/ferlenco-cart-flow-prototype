@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from './SummaryPage.module.css'
 
 const TICKER = '₹0 DEPOSIT  •  3/MO MIN TENURE  •  CANCEL ANYTIME  •  '
@@ -33,13 +33,15 @@ const OTHERS = [
 
 interface Props {
   onBack: () => void
+  onEditAddress: () => void
 }
 
-export default function SummaryPage({ onBack }: Props) {
+export default function SummaryPage({ onBack, onEditAddress }: Props) {
   const [itemsExpanded, setItemsExpanded] = useState(false)
   const [costExpanded, setCostExpanded] = useState(false)
   const [autoPayOn, setAutoPayOn] = useState(true)
   const [selectedUPI, setSelectedUPI] = useState<UPIOption | null>(null)
+  const paymentRef = useRef<HTMLDivElement>(null)
 
   return (
     <div className={styles.page}>
@@ -57,7 +59,7 @@ export default function SummaryPage({ onBack }: Props) {
           <div className={styles.addressCardTop}>
             <div className={styles.cardTopRow}>
               <span className={styles.sectionLabel}>SHIPPING ADDRESS</span>
-              <button className={styles.tealTextBtn}>EDIT</button>
+              <button className={styles.tealTextBtn} onClick={onEditAddress}>EDIT</button>
             </div>
             <div className={styles.addressRow}>
               <img src="/summaryPage/adityaTiwariLogo.svg" className={styles.locationIcon} alt="Location" />
@@ -158,7 +160,7 @@ export default function SummaryPage({ onBack }: Props) {
         </div>
 
         {/* ── Payment Method ── */}
-        <div className={styles.card}>
+        <div className={styles.card} ref={paymentRef}>
           <span className={styles.sectionLabel}>PAYMENT METHOD</span>
 
           <p className={styles.paySubLabel}>UPI</p>
@@ -194,6 +196,24 @@ export default function SummaryPage({ onBack }: Props) {
         </div>
 
         <div className={styles.bottomPad} />
+      </div>
+
+      {/* ── Sticky Pay Bar ── */}
+      <div className={styles.stickyBar}>
+        <button
+          className={styles.payUsing}
+          onClick={() => paymentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+        >
+          <span className={styles.payUsingLabel}>PAY USING</span>
+          <div className={styles.payUsingRow}>
+            <img src="/summaryPage/phonePeLogo.png" className={styles.phonepeIcon} alt="PhonePe" />
+            <span className={styles.payUsingMethod}>PhonePe UPI</span>
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+              <path d="M1 1l5 5-5 5" stroke="#1a1a1a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </button>
+        <button className={styles.payBtn}>Pay ₹13,974</button>
       </div>
 
     </div>

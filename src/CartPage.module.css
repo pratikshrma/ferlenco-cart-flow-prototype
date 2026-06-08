@@ -94,6 +94,15 @@
   overflow: hidden;
 }
 
+.itemEntering {
+  animation: cartEnter 0.38s ease forwards;
+}
+
+@keyframes cartEnter {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .itemExiting {
   animation: slideRemove 0.38s ease forwards;
 }
@@ -516,11 +525,31 @@
 .relatedRow {
   display: flex;
   gap: 10px;
+  overflow: hidden;
 }
 
 .relatedItem {
   flex: 1;
   min-width: 0;
+}
+
+.relatedItemExiting {
+  animation: relExit 0.28s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes relExit {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.7); }
+}
+
+.relatedItemEntering {
+  animation: relEnter 0.38s ease forwards;
+}
+
+@keyframes relEnter {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }
 
 .relatedImgPlaceholder {

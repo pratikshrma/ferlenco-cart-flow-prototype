@@ -4,11 +4,43 @@ import CouponSheet from './CouponSheet'
 import LoginSheet from './LoginSheet'
 import RemoveItemSheet, { type CartItem } from './RemoveItemSheet'
 
-const RELATED_PRODUCTS = [
-  { id: 1, name: 'Bed Side Table', price: '₹249/mo', originalPrice: '₹409', discount: '-15%' },
-  { id: 2, name: 'Bed Side Table', price: '₹249/mo', originalPrice: '₹409', discount: null },
-  { id: 3, name: 'Bed Side Table', price: '₹249/mo', originalPrice: '₹409', discount: '-10%' },
+interface RelatedProduct {
+  id: number
+  name: string
+  price: string
+  originalPrice: string
+  discount: string | null
+  image: string
+}
+
+const ALL_RELATED: RelatedProduct[] = [
+  { id: 101, name: 'Bed Side Table',       price: '₹249/mo', originalPrice: '₹409', discount: '-15%', image: '/YourCart/relatedProduct1.jpg' },
+  { id: 102, name: 'Bed Side Table',       price: '₹249/mo', originalPrice: '₹409', discount: null,   image: '/YourCart/relatedProduct2.jpg' },
+  { id: 103, name: 'Bed Side Table',       price: '₹249/mo', originalPrice: '₹409', discount: '-10%', image: '/YourCart/relatedProduct3.jpg' },
+  { id: 104, name: 'Study Desk',           price: '₹199/mo', originalPrice: '₹349', discount: null,   image: '/YourCart/relatedProduct1.jpg' },
+  { id: 105, name: 'Wardrobe',             price: '₹399/mo', originalPrice: '₹599', discount: '-20%', image: '/YourCart/relatedProduct2.jpg' },
+  { id: 106, name: 'Coffee Table',         price: '₹149/mo', originalPrice: '₹249', discount: null,   image: '/YourCart/relatedProduct3.jpg' },
+  { id: 107, name: 'Dining Chair',         price: '₹179/mo', originalPrice: '₹299', discount: '-8%',  image: '/YourCart/relatedProduct1.jpg' },
+  { id: 108, name: 'Bookshelf',            price: '₹219/mo', originalPrice: '₹379', discount: null,   image: '/YourCart/relatedProduct2.jpg' },
+  { id: 109, name: 'Recliner Chair',       price: '₹449/mo', originalPrice: '₹699', discount: '-12%', image: '/YourCart/relatedProduct3.jpg' },
+  { id: 110, name: 'TV Unit',              price: '₹279/mo', originalPrice: '₹459', discount: null,   image: '/YourCart/relatedProduct1.jpg' },
+  { id: 111, name: 'Shoe Rack',            price: '₹129/mo', originalPrice: '₹199', discount: '-5%',  image: '/YourCart/relatedProduct2.jpg' },
+  { id: 112, name: 'Chest of Drawers',     price: '₹329/mo', originalPrice: '₹529', discount: null,   image: '/YourCart/relatedProduct3.jpg' },
+  { id: 113, name: 'Sofa',                 price: '₹599/mo', originalPrice: '₹899', discount: '-18%', image: '/YourCart/relatedProduct1.jpg' },
 ]
+
+function relatedToCartItem(p: RelatedProduct): CartItem {
+  return {
+    id: p.id,
+    name: p.name,
+    subtitle: 'Brand New',
+    price: p.price,
+    originalPrice: p.originalPrice,
+    delivery: '3-4 Days',
+    isPremium: false,
+    image: p.image,
+  }
+}
 
 const INITIAL_ITEMS: CartItem[] = [
   {
@@ -53,6 +85,12 @@ interface Props {
 export default function CartPage({ onNavigateToAddress, onBack, hideTotal = false }: Props) {
   const [items, setItems] = useState<CartItem[]>(INITIAL_ITEMS)
   const [quantities, setQuantities] = useState<Record<number, number>>({ 1: 1, 2: 1, 3: 1 })
+
+  const [relatedDisplayed, setRelatedDisplayed] = useState<RelatedProduct[]>(ALL_RELATED.slice(0, 3))
+  const [relatedQueue,     setRelatedQueue]     = useState<RelatedProduct[]>(ALL_RELATED.slice(3))
+  const [exitingRelId,     setExitingRelId]     = useState<number | null>(null)
+  const [enteringRelId,    setEnteringRelId]    = useState<number | null>(null)
+  const [enteringCartId,   setEnteringCartId]   = useState<number | null>(null)
 const [protectEnabled, setProtectEnabled] = useState(true)
   const [showCoupons, setShowCoupons] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
@@ -86,6 +124,32 @@ const [protectEnabled, setProtectEnabled] = useState(true)
     }, 380)
   }
 
+  const addFromRelated = (product: RelatedProduct) => {
+    if (exitingRelId !== null) return // ignore taps during animation
+
+    setExitingRelId(product.id)
+
+    setTimeout(() => {
+      const next = relatedQueue[0] ?? null
+
+      setRelatedDisplayed(prev => {
+        const without = prev.filter(p => p.id !== product.id)
+        return next ? [...without, next] : without
+      })
+      if (next) {
+        setRelatedQueue(prev => prev.slice(1))
+        setEnteringRelId(next.id)
+        setTimeout(() => setEnteringRelId(null), 420)
+      }
+      setExitingRelId(null)
+
+      setItems(prev => [...prev, relatedToCartItem(product)])
+      setQuantities(prev => ({ ...prev, [product.id]: 1 }))
+      setEnteringCartId(product.id)
+      setTimeout(() => setEnteringCartId(null), 420)
+    }, 280)
+  }
+
   const handleSheetDecrement = () => {
     if (!sheetItem) return
     const cur = quantities[sheetItem.id] ?? 1
@@ -114,7 +178,7 @@ const [protectEnabled, setProtectEnabled] = useState(true)
         {items.map((item, idx) => (
           <div
             key={item.id}
-            className={`${styles.itemWrapper} ${exitingId === item.id ? styles.itemExiting : ''}`}
+            className={`${styles.itemWrapper} ${exitingId === item.id ? styles.itemExiting : ''} ${enteringCartId === item.id ? styles.itemEntering : ''}`}
           >
             <div className={styles.itemRow}>
               <div className={styles.itemImgWrap}>
@@ -147,7 +211,7 @@ const [protectEnabled, setProtectEnabled] = useState(true)
                       </svg>
                     </button>
                     <div className={styles.stepper}>
-                      <button className={styles.stepBtn} onClick={() => openRemoveSheet(item)}>−</button>
+                      <button className={styles.stepBtn} onClick={() => quantities[item.id] <= 1 ? openRemoveSheet(item) : updateQty(item.id, -1)}>−</button>
                       <span className={styles.stepCount}>{quantities[item.id]}</span>
                       <button className={styles.stepBtn} onClick={() => updateQty(item.id, 1)}>+</button>
                     </div>
@@ -185,25 +249,30 @@ const [protectEnabled, setProtectEnabled] = useState(true)
       </div>
 
       {/* ── Related Products ── */}
-      <div className={styles.card}>
-        <p className={styles.sectionLabel}>RELATED PRODUCTS</p>
-        <div className={styles.relatedRow}>
-          {RELATED_PRODUCTS.map(product => (
-            <div key={product.id} className={styles.relatedItem}>
-              <div className={styles.relatedImgPlaceholder}>
-                <img src={`/YourCart/relatedProduct${product.id}.jpg`} className={styles.relatedImg} alt={product.name} />
-                <button className={styles.relatedAddBtn}>+</button>
+      {relatedDisplayed.length > 0 && (
+        <div className={styles.card}>
+          <p className={styles.sectionLabel}>RELATED PRODUCTS</p>
+          <div className={styles.relatedRow}>
+            {relatedDisplayed.map(product => (
+              <div
+                key={product.id}
+                className={`${styles.relatedItem} ${exitingRelId === product.id ? styles.relatedItemExiting : ''} ${enteringRelId === product.id ? styles.relatedItemEntering : ''}`}
+              >
+                <div className={styles.relatedImgPlaceholder}>
+                  <img src={product.image} className={styles.relatedImg} alt={product.name} />
+                  <button className={styles.relatedAddBtn} onClick={() => addFromRelated(product)}>+</button>
+                </div>
+                <p className={styles.relatedName}>{product.name}</p>
+                <div className={styles.relatedPriceRow}>
+                  <span className={styles.relatedPrice}>{product.price}</span>
+                  {product.discount && <span className={styles.relatedDiscount}>{product.discount}</span>}
+                </div>
+                <p className={styles.relatedOriginalPrice}>{product.originalPrice}</p>
               </div>
-              <p className={styles.relatedName}>{product.name}</p>
-              <div className={styles.relatedPriceRow}>
-                <span className={styles.relatedPrice}>{product.price}</span>
-                {product.discount && <span className={styles.relatedDiscount}>{product.discount}</span>}
-              </div>
-              <p className={styles.relatedOriginalPrice}>{product.originalPrice}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* ── Icons Banner ── */}
       <img src="/YourCart/iconsImage.svg" alt="" className={styles.iconsBanner} />

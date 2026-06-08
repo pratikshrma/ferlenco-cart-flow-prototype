@@ -53,8 +53,6 @@ export default function ProductPage({ onBack, onRent }: Props) {
 
   const scrollTo = (tab: Tab) => {
     setActiveTab(tab)
-    const map = { customise: customiseRef, details: detailsRef, delivery: deliveryRef }
-    map[tab].current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
