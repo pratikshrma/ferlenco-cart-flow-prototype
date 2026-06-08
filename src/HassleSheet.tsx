@@ -30,21 +30,33 @@ export default function HassleSheet({ open, onClose, onContinue }: Props) {
         <div className={styles.features}>
 
           <div className={styles.featureCol}>
-            <img src="/hastleFreeRentals/payMonthly.svg" alt="Pay monthly" className={styles.iconWrap} />
-            <p className={styles.featureTitle}>Pay monthly</p>
-            <p className={styles.featureSub}>renew at the end of each month</p>
+            <div className={styles.iconArea}>
+              <img src="/hastleFreeRentals/payMonthly.svg" alt="Pay monthly" className={styles.iconWrap} />
+            </div>
+            <div className={styles.textArea}>
+              <p className={styles.featureTitle}>Pay monthly</p>
+              <p className={styles.featureSub}>renew at the end of each month</p>
+            </div>
           </div>
 
           <div className={styles.featureCol}>
-            <img src="/hastleFreeRentals/3mMinimum.svg" alt="3M Minimum" className={styles.iconWrap} />
-            <p className={styles.featureTitle}>3M Minimum</p>
-            <p className={styles.featureSub}>End early to pay for the remaining</p>
+            <div className={styles.iconArea}>
+              <img src="/hastleFreeRentals/3mMinimum.svg" alt="3M Minimum" className={styles.iconWrap} />
+            </div>
+            <div className={styles.textArea}>
+              <p className={styles.featureTitle}>3M Minimum</p>
+              <p className={styles.featureSub}>End early to pay for the remaining</p>
+            </div>
           </div>
 
           <div className={styles.featureCol}>
-            <img src="/hastleFreeRentals/autoPay.svg" alt="Autopay" className={styles.iconWrap} style={{ width: 92, height: 92 }} />
-            <p className={styles.featureTitle}>Autopay</p>
-            <p className={styles.featureSub}>never miss your payments</p>
+            <div className={styles.iconArea}>
+              <img src="/hastleFreeRentals/autoPay.svg" alt="Autopay" className={styles.iconWrap} style={{ width: 92, height: 92 }} />
+            </div>
+            <div className={styles.textArea}>
+              <p className={styles.featureTitle}>Autopay</p>
+              <p className={styles.featureSub}>never miss your payments</p>
+            </div>
           </div>
 
         </div>

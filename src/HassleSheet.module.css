@@ -28,7 +28,12 @@
   padding: 12px 24px 40px;
   transform: translateY(100%);
   transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
-  font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Avenir",
+    "Avenir Next",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   text-align: center;
 }
 
@@ -62,7 +67,7 @@
 }
 
 .brandName {
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   color: #aaa;
   letter-spacing: 2px;
@@ -86,18 +91,33 @@
 }
 
 .featureCol {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 0;
+}
+
+.iconArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
 .iconWrap {
   width: 80px;
   height: 80px;
   object-fit: contain;
-  margin-bottom: 4px;
+}
+
+.textArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
 .featureTitle {
