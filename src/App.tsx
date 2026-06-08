@@ -20,7 +20,7 @@ export default function App() {
     <>
       {/* Product page is always the base */}
       <ProductPage
-        onBack={() => setScreen('cart')}
+        onBack={() => {}}
         onRent={() => setShowFomoSheet(true)}
       />
 

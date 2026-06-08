@@ -74,6 +74,11 @@
   flex: 1;
   overflow-y: auto;
   padding-bottom: 80px;
+  scrollbar-width: none;
+}
+
+.scrollArea::-webkit-scrollbar {
+  display: none;
 }
 
 /* ── Product image ── */
