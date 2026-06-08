@@ -244,14 +244,14 @@
 
 /* ── Items list ── */
 .itemList {
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .itemRow {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 0;
+  gap: 16px;
+  padding: 14px 0;
 }
 
 .itemRowBorder {
@@ -260,24 +260,24 @@
 
 .itemThumbWrap {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   flex-shrink: 0;
 }
 
 .itemThumb {
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
   object-fit: cover;
 }
 
 .premiumDot {
   position: absolute;
-  bottom: 4px;
-  left: 4px;
-  width: 16px;
-  height: 16px;
+  bottom: 5px;
+  left: 5px;
+  width: 18px;
+  height: 18px;
   background: #e8a020;
   border-radius: 50%;
   border: 2px solid #fff;
@@ -285,18 +285,26 @@
 
 .itemName {
   flex: 1;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #1a1a1a;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .itemPrice {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: #1a1a1a;
   flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ── Section divider inside combined card ── */
+.sectionDivider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 16px -16px;
 }
 
 /* ── Cost Breakup ── */
@@ -323,6 +331,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 20px;
 }
 
 .breakdownRow {
@@ -433,19 +442,46 @@
   object-fit: contain;
 }
 
-.offerCode {
+.offerText {
   flex: 1;
+  min-width: 0;
+}
+
+.offerTitle {
   font-size: 15px;
   font-weight: 700;
   color: #1a1a1a;
+  margin: 0 0 2px;
 }
 
-.appliedText {
+.offerSub {
   font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+.applyBtn {
+  border: 1.5px solid #2a7f8a;
+  color: #2a7f8a;
+  background: none;
+  border-radius: 10px;
+  padding: 9px 18px;
+  font-size: 13px;
   font-weight: 700;
-  color: #1aafaf;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.appliedLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2a7f8a;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* ── Ticker ── */

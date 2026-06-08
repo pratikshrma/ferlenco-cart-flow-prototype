@@ -6,6 +6,13 @@ interface Props {
   onContinue: () => void
 }
 
+const ADD_ONS = [
+  { img: '/YourCart/relatedProduct1.jpg', name: 'Bed Side Table', price: '₹249/mo', discount: '-10%' },
+  { img: '/YourCart/relatedProduct2.jpg', name: 'Bed Side Table', price: '₹249/mo', discount: null },
+  { img: '/YourCart/relatedProduct3.jpg', name: 'Bed Side Table', price: '₹249/mo', discount: '-10%' },
+  { img: '/YourCart/sideTable.png',       name: 'Bed Side Table', price: '₹249/mo', discount: null },
+]
+
 export default function FomoSheet({ open, onClose, onContinue }: Props) {
   return (
     <>
@@ -14,51 +21,35 @@ export default function FomoSheet({ open, onClose, onContinue }: Props) {
         onClick={onClose}
       />
 
-      <div className={`${styles.sheet} ${open ? styles.sheetOpen : ''}`}>
-        <div className={styles.handle} />
-
-        {/* Shield icon */}
-        <div className={styles.shieldWrap}>
-          <img src="/standardRentalPlan/mainLogo.png" alt="Standard Rental Plan" className={styles.shieldImg} />
+      <div className={`${styles.modal} ${open ? styles.modalOpen : ''}`}>
+        {/* Header */}
+        <div className={styles.header}>
+          <div>
+            <h2 className={styles.title}>Usually best paired with</h2>
+            <p className={styles.subtitle}>You can pair your bed with an add on</p>
+          </div>
+          <button className={styles.closeBtn} onClick={onClose}>✕</button>
         </div>
 
-        {/* Title */}
-        <p className={styles.subtitle}>Your products are valid under</p>
-        <h2 className={styles.title}>Standard Rental Plan</h2>
-
-        {/* Feature icons */}
-        <div className={styles.features}>
-          <div className={styles.featureItem}>
-            <div className={styles.iconBox}>
-              <img src="/standardRentalPlan/PayMonthly.svg" alt="Pay monthly" className={styles.iconImg} />
+        {/* Horizontal product scroll */}
+        <div className={styles.scrollRow}>
+          {ADD_ONS.map((item, i) => (
+            <div key={i} className={styles.card}>
+              <div className={styles.imageWrap}>
+                <img src={item.img} alt={item.name} className={styles.cardImg} />
+                <button className={styles.addBtn}>+</button>
+              </div>
+              <p className={styles.cardName}>{item.name}</p>
+              <div className={styles.cardPriceRow}>
+                <span className={styles.cardPrice}>{item.price}</span>
+                {item.discount && <span className={styles.discountBadge}>{item.discount}</span>}
+              </div>
             </div>
-            <span className={styles.featureLabel}>Pay monthly</span>
-          </div>
-
-          <div className={styles.featureItem}>
-            <div className={styles.iconBox}>
-              <img src="/standardRentalPlan/3mMinimum.svg" alt="3M Minimum" className={styles.iconImg} />
-            </div>
-            <span className={styles.featureLabel}>3M Minimum</span>
-          </div>
-
-          <div className={styles.featureItem}>
-            <div className={styles.iconBox}>
-              <img src="/standardRentalPlan/customDelivery.svg" alt="Custom Delivery" className={styles.iconImg} />
-            </div>
-            <span className={styles.featureLabel}>Custom Delivery</span>
-          </div>
+          ))}
         </div>
 
-        {/* Description */}
-        <p className={styles.description}>
-          Your cart contains products on a monthly payment plan, each with a minimum period of 3 months
-        </p>
-
-        {/* Continue button */}
-        <button className={styles.continueBtn} onClick={onContinue}>
-          Continue
-        </button>
+        {/* Skip button */}
+        <button className={styles.skipBtn} onClick={onContinue}>I'll skip it</button>
       </div>
     </>
   )

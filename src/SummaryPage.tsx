@@ -38,8 +38,9 @@ interface Props {
 
 export default function SummaryPage({ onBack, onEditAddress }: Props) {
   const [itemsExpanded, setItemsExpanded] = useState(false)
-  const [costExpanded, setCostExpanded] = useState(false)
+  const [costExpanded, setCostExpanded] = useState(true)
   const [autoPayOn, setAutoPayOn] = useState(true)
+  const [offerApplied, setOfferApplied] = useState(false)
   const [selectedUPI, setSelectedUPI] = useState<UPIOption | null>(null)
   const paymentRef = useRef<HTMLDivElement>(null)
 
@@ -75,57 +76,63 @@ export default function SummaryPage({ onBack, onEditAddress }: Props) {
           </div>
         </div>
 
-        {/* ── 03 Items ── */}
+        {/* ── Items + Cost Breakup (combined card) ── */}
         <div className={styles.card}>
+
+          {/* Items section */}
           <button className={styles.collapseRow} onClick={() => setItemsExpanded(v => !v)}>
             <span className={styles.sectionLabel}>03 ITEMS</span>
             <span className={`${styles.chevron} ${itemsExpanded ? '' : styles.chevronClosed}`}><img src="/down.svg" alt="" className={styles.chevronImg} /></span>
           </button>
-          {!itemsExpanded ? (
+          {!itemsExpanded && (
             <div className={styles.itemsCollapsed}>
-              <p className={styles.itemsSummaryText}>Aara solid wood Queen bed, Side table...</p>
               <div className={styles.thumbRow}>
                 {ITEMS.map(item => (
                   <img key={item.id} src={item.image} className={styles.thumb} alt={item.name} />
                 ))}
               </div>
             </div>
-          ) : (
-            <div className={styles.itemList}>
-              {ITEMS.map((item, idx) => (
-                <div key={item.id} className={`${styles.itemRow} ${idx < ITEMS.length - 1 ? styles.itemRowBorder : ''}`}>
-                  <div className={styles.itemThumbWrap}>
-                    <img src={item.image} className={styles.itemThumb} alt={item.name} />
-                    {item.isPremium && <span className={styles.premiumDot} />}
-                  </div>
-                  <p className={styles.itemName}>{item.name}</p>
-                  <span className={styles.itemPrice}>{item.price}</span>
-                </div>
-              ))}
-            </div>
           )}
-        </div>
 
-        {/* ── Cost Breakup ── */}
-        <div className={styles.card}>
-          <button className={styles.collapseRow} onClick={() => setCostExpanded(v => !v)}>
-            <span className={styles.sectionLabel}>COST BREAKUP</span>
-            <span className={`${styles.chevron} ${costExpanded ? '' : styles.chevronClosed}`}><img src="/down.svg" alt="" className={styles.chevronImg} /></span>
-          </button>
-          <div className={styles.payableRow}>
-            <span className={styles.payableLabel}>Payable now</span>
-            <span className={styles.payableAmount}>₹13899.98</span>
-          </div>
-          {costExpanded && (
-            <div className={styles.breakdownList}>
-              {COST_BREAKDOWN.map(row => (
-                <div key={row.label} className={styles.breakdownRow}>
-                  <span className={styles.breakdownLabel}>{row.label}</span>
-                  <span className={styles.breakdownAmount}>{row.amount}</span>
+          {itemsExpanded && (
+            <>
+              <div className={styles.itemList}>
+                {ITEMS.map((item, idx) => (
+                  <div key={item.id} className={`${styles.itemRow} ${idx < ITEMS.length - 1 ? styles.itemRowBorder : ''}`}>
+                    <div className={styles.itemThumbWrap}>
+                      <img src={item.image} className={styles.itemThumb} alt={item.name} />
+                      {item.isPremium && <span className={styles.premiumDot} />}
+                    </div>
+                    <p className={styles.itemName}>{item.name}</p>
+                    <span className={styles.itemPrice}>{item.price}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.sectionDivider} />
+
+              {/* Cost Breakup section */}
+              <button className={styles.collapseRow} onClick={() => setCostExpanded(v => !v)}>
+                <span className={styles.sectionLabel}>COST BREAKUP</span>
+                <span className={`${styles.chevron} ${costExpanded ? '' : styles.chevronClosed}`}><img src="/down.svg" alt="" className={styles.chevronImg} /></span>
+              </button>
+              <div className={styles.payableRow}>
+                <span className={styles.payableLabel}>Payable now</span>
+                <span className={styles.payableAmount}>₹13899.98</span>
+              </div>
+              {costExpanded && (
+                <div className={styles.breakdownList}>
+                  {COST_BREAKDOWN.map(row => (
+                    <div key={row.label} className={styles.breakdownRow}>
+                      <span className={styles.breakdownLabel}>{row.label}</span>
+                      <span className={styles.breakdownAmount}>{row.amount}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
+
         </div>
 
         {/* ── Auto Pay ── */}
@@ -149,8 +156,19 @@ export default function SummaryPage({ onBack, onEditAddress }: Props) {
           <span className={styles.sectionLabel}>OFFERS</span>
           <div className={styles.offerRow}>
             <img src="/summaryPage/GreenOffer.svg" className={styles.offerIcon} alt="Offer" />
-            <span className={styles.offerCode}>FLAT100</span>
-            <span className={styles.appliedText}>APPLIED ✓</span>
+            <div className={styles.offerText}>
+              <p className={styles.offerTitle}>Save ₹199</p>
+              <p className={styles.offerSub}>Free delivery over ₹500/mo</p>
+            </div>
+            {offerApplied
+              ? <span className={styles.appliedLabel}>
+                  <svg width="14" height="11" viewBox="0 0 14 11" fill="none" style={{display:'inline-block', verticalAlign:'middle', marginRight:5}}>
+                    <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="#2a7f8a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  APPLIED
+                </span>
+              : <button className={styles.applyBtn} onClick={() => setOfferApplied(true)}>APPLY</button>
+            }
           </div>
         </div>
 

@@ -51,6 +51,7 @@ const INITIAL_ITEMS: CartItem[] = [
     originalPrice: '₹409',
     delivery: '3-4 Days',
     isPremium: false,
+    discount: '-10%',
     image: '/YourCart/AaraSolidWood.png',
   },
   {
@@ -61,6 +62,7 @@ const INITIAL_ITEMS: CartItem[] = [
     originalPrice: '₹409',
     delivery: '3-4 Days',
     isPremium: true,
+    discount: '-10%',
     image: '/YourCart/queen.png',
   },
   {
@@ -71,6 +73,7 @@ const INITIAL_ITEMS: CartItem[] = [
     originalPrice: '₹409',
     delivery: '3-4 Days',
     isPremium: false,
+    outOfStock: true,
     image: '/YourCart/sideTable.png',
   },
 ]
@@ -91,7 +94,8 @@ export default function CartPage({ onNavigateToAddress, onBack, hideTotal = fals
   const [exitingRelId,     setExitingRelId]     = useState<number | null>(null)
   const [enteringRelId,    setEnteringRelId]    = useState<number | null>(null)
   const [enteringCartId,   setEnteringCartId]   = useState<number | null>(null)
-const [protectEnabled, setProtectEnabled] = useState(true)
+  const [protectEnabled, setProtectEnabled] = useState(true)
+  const [offerApplied, setOfferApplied] = useState(false)
   const [showCoupons, setShowCoupons] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
 
@@ -178,44 +182,43 @@ const [protectEnabled, setProtectEnabled] = useState(true)
         {items.map((item, idx) => (
           <div
             key={item.id}
-            className={`${styles.itemWrapper} ${exitingId === item.id ? styles.itemExiting : ''} ${enteringCartId === item.id ? styles.itemEntering : ''}`}
+            className={`${styles.itemWrapper} ${exitingId === item.id ? styles.itemExiting : ''} ${enteringCartId === item.id ? styles.itemEntering : ''}}`}
           >
             <div className={styles.itemRow}>
               <div className={styles.itemImgWrap}>
-                <img src={item.image} className={styles.itemImg} alt={item.name} />
+                <img src={item.image} className={`${styles.itemImg} ${item.outOfStock ? styles.itemImgGray : ''}`} alt={item.name} />
               </div>
               <div className={styles.itemContent}>
                 <div className={styles.itemTopRow}>
                   <div className={styles.itemMeta}>
-                    <p className={styles.itemName}>{item.name}</p>
-                    <p className={styles.itemSubtitle}>{item.subtitle}</p>
+                    <p className={`${styles.itemName} ${item.outOfStock ? styles.itemTextGray : ''}`}>{item.name}</p>
+                    <p className={`${styles.itemSubtitle} ${item.outOfStock ? styles.itemTextGray : ''}`}>{item.subtitle}</p>
                   </div>
                   <div className={styles.itemPriceCol}>
-                    <p className={styles.itemPrice}>{item.price}</p>
+                    <p className={`${styles.itemPrice} ${item.outOfStock ? styles.itemTextGray : ''}`}>{item.price}</p>
                     <p className={styles.itemOriginalPrice}>{item.originalPrice}</p>
                   </div>
                 </div>
+                {item.discount && <span className={styles.itemDiscountBadge}>{item.discount}</span>}
                 <div className={styles.itemBottomRow}>
-                  <div className={styles.deliveryRow}>
-                    <img src="/YourCart/icons/truck.svg" alt="" className={styles.truckIcon} />
-                    <span className={styles.deliveryText}>{item.delivery}</span>
-                  </div>
-                  <div className={styles.itemActions}>
-                    <button
-                      className={styles.trashBtn}
-                      aria-label="Remove item"
-                      onClick={() => openRemoveSheet(item)}
-                    >
-                      <svg width="14" height="16" viewBox="0 0 14 16" fill="none">
-                        <path d="M1 4h12M5 4V2h4v2M2 4l1 10h8l1-10" stroke="#bbb" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </button>
-                    <div className={styles.stepper}>
-                      <button className={styles.stepBtn} onClick={() => quantities[item.id] <= 1 ? openRemoveSheet(item) : updateQty(item.id, -1)}>−</button>
-                      <span className={styles.stepCount}>{quantities[item.id]}</span>
-                      <button className={styles.stepBtn} onClick={() => updateQty(item.id, 1)}>+</button>
-                    </div>
-                  </div>
+                  {item.outOfStock ? (
+                    <>
+                      <span className={styles.outOfStockLabel}>OUT OF STOCK</span>
+                      <button className={styles.replaceBtn}>REPLACE</button>
+                    </>
+                  ) : (
+                    <>
+                      <div className={styles.deliveryRow}>
+                        <img src="/YourCart/icons/truck.svg" alt="" className={styles.truckIcon} />
+                        <span className={styles.deliveryText}>{item.delivery}</span>
+                      </div>
+                      <div className={styles.stepper}>
+                        <button className={styles.stepBtn} onClick={() => quantities[item.id] <= 1 ? openRemoveSheet(item) : updateQty(item.id, -1)}>−</button>
+                        <span className={styles.stepCount}>{quantities[item.id]}</span>
+                        <button className={styles.stepBtn} onClick={() => updateQty(item.id, 1)}>+</button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -297,7 +300,15 @@ const [protectEnabled, setProtectEnabled] = useState(true)
             <p className={styles.offerCode}>Save ₹199</p>
             <p className={styles.offerSubtext}>Free delivery over ₹500/mo</p>
           </div>
-          <button className={styles.applyBtn}>APPLY</button>
+          {offerApplied
+            ? <span className={styles.appliedLabel}>
+                <svg width="14" height="11" viewBox="0 0 14 11" fill="none" style={{display:'inline-block', verticalAlign:'middle', marginRight:5}}>
+                  <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="#2a7f8a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                APPLIED
+              </span>
+            : <button className={styles.applyBtn} onClick={() => setOfferApplied(true)}>APPLY</button>
+          }
         </div>
         <div className={styles.couponBanner}>
           <span>Add ₹299 to your cart to avail this coupon</span>

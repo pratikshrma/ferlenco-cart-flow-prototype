@@ -9,6 +9,8 @@ export interface CartItem {
   originalPrice: string
   delivery: string
   isPremium: boolean
+  outOfStock?: boolean
+  discount?: string
   image: string
 }
 
