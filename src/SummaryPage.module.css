@@ -54,6 +54,11 @@
   overflow-y: auto;
   padding: 10px 0 0;
   padding-bottom: 16px;
+  scrollbar-width: none;
+}
+
+.scrollArea::-webkit-scrollbar {
+  display: none;
 }
 
 /* ── Cards ── */
